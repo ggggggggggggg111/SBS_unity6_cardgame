@@ -191,6 +191,12 @@ MonoBehaviour:
   - {fileID: -1569328136, guid: cd2688e0e2779554db61d9557fc075f2, type: 3}
   - {fileID: -1659972622, guid: cd2688e0e2779554db61d9557fc075f2, type: 3}
   - {fileID: 899048232, guid: cd2688e0e2779554db61d9557fc075f2, type: 3}
+  sr_array:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!4 &66631951
 Transform:
   m_ObjectHideFlags: 0
