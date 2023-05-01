@@ -2,11 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using Unity.Mathematics;
 
 public class GameManager : MonoBehaviour
 {
     public GameObject[] card;
 
+    public Text chnageText;
 
     public Sprite[] my_sprites;
 
@@ -14,18 +18,19 @@ public class GameManager : MonoBehaviour
     List<string> card_list = new List<string>();
     List<int> card_list_numOnly = new List<int>();
     List<string> card_list_shapeOnly = new List<string>();
-
+    List<int> card_list_rendnum= new List<int>();
 
 
     [SerializeField] SpriteRenderer[] sr_array;
 
 
-
+    
 
     SpriteRenderer card_renderer;
     void Start()
     {
-
+        UnduplicateRandom(card_list_rendnum);
+        chnageText.text = "게임 시작합니다.";
         for (int i = 0; i < card.Length; i++)
         {
 
@@ -36,11 +41,11 @@ public class GameManager : MonoBehaviour
 
             card_renderer = card[i].GetComponent<SpriteRenderer>();
 
-            card_renderer.sprite = my_sprites[i];
+            card_renderer.sprite = my_sprites[card_list_rendnum[i]];
 
-            card_list.Add(card_renderer.sprite.name);
-            card_list_numOnly.Add(int.Parse(card_renderer.sprite.name.Substring(0, 2)));
-            card_list_shapeOnly.Add(card_renderer.sprite.name.Substring(2, 1));
+            card_list.Add(my_sprites[card_list_rendnum[i]].name);
+            card_list_numOnly.Add(int.Parse(my_sprites[card_list_rendnum[i]].name.Substring(0, 2)));
+            card_list_shapeOnly.Add(my_sprites[card_list_rendnum[i]].name.Substring(2, 1));
 
 
 
@@ -54,16 +59,40 @@ public class GameManager : MonoBehaviour
         card_list_numOnly.Sort();
         card_list_shapeOnly.Sort();
 
-        Batting();
+        
+
+        
     }
 
-
+    public void ReStart()
+    {
+        SceneManager.LoadScene(0);
+    }
     // Update is called once per frame
     void Update()
     {
+        
+    }
+
+    void UnduplicateRandom(List<int> card_list_rendnum)
+    {
+        int tmp_random = UnityEngine.Random.Range(0, 32);
+
+        for (int i = 0; i < 7;)
+        {
+            if (card_list_rendnum.Contains(tmp_random))
+            {
+                tmp_random = UnityEngine.Random.Range(0, 32);
+            }
+            else
+            {
+                card_list_rendnum.Add(tmp_random);
+                i++;
+            }
+        }
 
     }
-    public void Batting()
+        public void Batting()
     {
 
         int paircount = 0;
@@ -109,37 +138,37 @@ public class GameManager : MonoBehaviour
             isflush = true;
         }
         if (isRoyalStraight && isflush)
-            Debug.Log("Royal Straight Flush");
+            chnageText.text ="Royal Straight Flush";
 
         else if (strightcount == 4 && isflush)
-            Debug.Log("Straight Flush");
+            chnageText.text = "Straight Flush";
 
         else if (isRoyalStraight)
-            Debug.Log(" Royal Flush");
+            chnageText.text = " Royal Flush";
 
         else if (isflush)
-            Debug.Log("Flush");
+            chnageText.text = "Flush";
 
         else if (strightcount == 4)
-            Debug.Log("Straight");
+            chnageText.text = "Straight";
 
         else if (paircount == 6)
-            Debug.Log("Four Card");
+            chnageText.text = "Four Card";
 
         else if (paircount == 4)
-            Debug.Log("Full House");
+            chnageText.text = "Full House";
 
         else if (paircount == 3)
-            Debug.Log("Three Pair");
+            chnageText.text = "Three Pair";
 
         else if (paircount == 2)
-            Debug.Log("Two Pair");
+            chnageText.text = "Two Pair";
 
         else if (paircount == 1)
-            Debug.Log("One Pair");
+            chnageText.text = "One Pair";
 
         else
-            Debug.Log("Top Card");
+            chnageText.text = "Top Card";
     }
 
 
