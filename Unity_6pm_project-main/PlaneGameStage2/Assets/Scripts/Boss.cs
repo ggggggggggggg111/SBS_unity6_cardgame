@@ -12,6 +12,10 @@ public class Boss : MonoBehaviour
 
     int patten_select = 0;
 
+    public bool isbossDead =false;
+    public float max_bosshp = 100;
+    public float cur_bosshp;
+
     List<GameObject> bullet_arr = new List<GameObject>();
     List<Rigidbody2D> rigid_arr = new List<Rigidbody2D>();
 
@@ -20,6 +24,7 @@ public class Boss : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        cur_bosshp = max_bosshp;
         Invoke("BossPatten", 3);
         
     }
@@ -37,8 +42,15 @@ public class Boss : MonoBehaviour
     {
         if (collision.gameObject.tag == "PlayerBullet")
         {
+            cur_bosshp = cur_bosshp - 1;
             Destroy(collision.gameObject);
-            
+
+            if (cur_bosshp <= 0)
+            {
+                isbossDead = true;
+                Destroy(gameObject);
+                
+            }
         }
     }
 

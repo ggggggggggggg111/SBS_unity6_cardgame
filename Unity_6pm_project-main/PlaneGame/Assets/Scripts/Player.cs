@@ -65,6 +65,8 @@ public class Player : MonoBehaviour
             return;
 
         GameObject bullet_info = Instantiate(bullet, transform.position, transform.rotation);
+
+        bullet_info.transform.position = inputVec;
         Rigidbody2D bullet_rigid = bullet_info.GetComponent<Rigidbody2D>();
 
         bullet_rigid.AddForce(Vector2.up * bullet_speed, ForceMode2D.Impulse);
@@ -103,12 +105,9 @@ public class Player : MonoBehaviour
             
             hp = hp - 1;
 
-            Destroy(collision.gameObject);
+            collision.gameObject.SetActive(false);
 
-            if (hp <= 0)
-            {
-                Destroy(gameObject);
-            }
+            
 
         }
 

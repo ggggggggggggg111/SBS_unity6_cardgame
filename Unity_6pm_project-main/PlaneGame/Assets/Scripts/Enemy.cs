@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour
     float cur_timer;
     float destroy_timer=7;
 
-    int hp = 3;
+    public int hp = 3;
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +25,7 @@ public class Enemy : MonoBehaviour
         if(cur_timer> destroy_timer) 
         {
 
-            Destroy(gameObject);
+            gameObject.SetActive(false);
             cur_timer= 0;
         }
 
@@ -40,14 +40,14 @@ public class Enemy : MonoBehaviour
             hp = hp - 1;
             Debug.Log("ÃÑ¾ËÀÌ ´ê¾Ò½À´Ï´Ù.");
 
-            Destroy(collision.gameObject);
+            collision.gameObject.SetActive(false);
 
-            if (hp <= 0)
+
+            if (hp <=0)
             {
-                Destroy(gameObject);
-                
+                cur_timer = 0;
+                gameObject.SetActive(false);
             }
-            
         }
     
         
