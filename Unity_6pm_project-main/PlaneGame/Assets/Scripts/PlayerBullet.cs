@@ -7,7 +7,10 @@ public class PlayerBullet : MonoBehaviour
     Rigidbody2D my_rigid;
     public float bulletSpeed;
 
-    float destroy_timer = 6;
+   
+
+
+    float destroy_timer = 4;
     float cur_timer = 0;
 
 
@@ -26,7 +29,7 @@ public class PlayerBullet : MonoBehaviour
         cur_timer = cur_timer + Time.deltaTime;
         if (cur_timer > destroy_timer)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
             cur_timer = 0;
         }
 

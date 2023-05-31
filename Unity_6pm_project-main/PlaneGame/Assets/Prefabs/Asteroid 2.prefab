@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8843916617364311387}
   - component: {fileID: 8016403558457231644}
   - component: {fileID: 570134716615684605}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Asteroid 2
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -120,6 +120,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b74bd42d9bbf9f4eab4fb5a3094be78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sparkle_expl: {fileID: 100002, guid: cafecd3fc3b761c45bb1553f35cf5c96, type: 3}
+  hp: 3
 --- !u!58 &570134716615684605
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -130,7 +132,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

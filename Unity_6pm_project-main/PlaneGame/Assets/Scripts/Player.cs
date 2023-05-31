@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     Rigidbody2D my_rigid;
 
     public Vector2 inputVec;
+    
 
     public float my_speed = 10;
 
@@ -22,6 +23,8 @@ public class Player : MonoBehaviour
     bool hit_bottombox = false;
 
     int hp=3;
+
+    public ObjectManager obj_manager;
 
     void Start()
     {
@@ -64,9 +67,9 @@ public class Player : MonoBehaviour
         if (cur_delay < fire_delay)
             return;
 
-        GameObject bullet_info = Instantiate(bullet, transform.position, transform.rotation);
+        GameObject bullet_info = obj_manager.SelectObj("PlayerBullet");
+        bullet_info.transform.position = gameObject.transform.position;
 
-        bullet_info.transform.position = inputVec;
         Rigidbody2D bullet_rigid = bullet_info.GetComponent<Rigidbody2D>();
 
         bullet_rigid.AddForce(Vector2.up * bullet_speed, ForceMode2D.Impulse);
@@ -100,16 +103,15 @@ public class Player : MonoBehaviour
 
 
         }
-        else if(collision.transform.tag == "Enemy")
+        /*else if(collision.transform.tag == "Enemy")
         {
             
             hp = hp - 1;
 
             collision.gameObject.SetActive(false);
 
-            
 
-        }
+        }*/
 
         //if (collision.transform.tag == "Boundary")
         //{
@@ -167,5 +169,11 @@ public class Player : MonoBehaviour
         }
     }
 
-
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            gameObject.SetActive(false);
+        }
+    }
 }
