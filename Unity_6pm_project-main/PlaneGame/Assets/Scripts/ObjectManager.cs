@@ -7,20 +7,23 @@ public class ObjectManager : MonoBehaviour
     public GameObject sparkle_expl;
     public GameObject enemy;
     public GameObject playerBullet;
+    public GameObject BossBullet;
 
     GameObject[] enemy_arr;
     GameObject[] playerBullet_arr;
     GameObject[] sparkle_expl_arr;
+    GameObject[] bossbullet_arr;
 
     GameObject[] obj_arr;
 
+    
     void Start()
     {
 
         enemy_arr= new GameObject[30];
         playerBullet_arr = new GameObject[50];
         sparkle_expl_arr = new GameObject[30];
-
+        bossbullet_arr = new GameObject[150];
 
         InitObj();
 
@@ -45,6 +48,11 @@ public class ObjectManager : MonoBehaviour
             sparkle_expl_arr[i] = Instantiate(sparkle_expl);
             sparkle_expl_arr[i].SetActive(false);
         }
+        for (int i = 0; i < bossbullet_arr.Length; i++)
+        {
+            bossbullet_arr[i] = Instantiate(BossBullet);
+            bossbullet_arr[i].SetActive(false);
+        }
 
     }
 
@@ -63,6 +71,9 @@ public class ObjectManager : MonoBehaviour
 
             case "Sparkle_expl":
                 obj_arr = sparkle_expl_arr;
+                break;
+            case "BossBullet":
+                obj_arr = bossbullet_arr;
                 break;
 
 

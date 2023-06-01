@@ -4,19 +4,26 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    
+    public GameObject Bossobj;
     public GameObject playerobj;
     public GameObject astroid;
     public GameObject[] spawn_pos;
     public GameObject player_spawn_pos;
 
-    GameObject player_info;
+    public GameObject boss_spawn_pos;
     
+
+    GameObject player_info;
+    GameObject boss_info;
+
     float cur_timer = 0;
     float spawn_delay = .7f;
 
+    bool isBossSpawn = true;
+
     Enemy enemycs;
     Player playercs;
+    Boss bosscs;
 
     
 
@@ -44,13 +51,18 @@ public class GameManager : MonoBehaviour
         cur_timer = cur_timer + Time.deltaTime;
         //cur_timer += Time.deltaTime; // À§¶û °°Àº°Å
 
-        if(cur_timer> spawn_delay)
+        if ((cur_timer > spawn_delay) && isBossSpawn)
+        {
+            SpawnBoss();
+        }
+        if (cur_timer> spawn_delay)
         {
             SpawnEnemy();
 
             cur_timer = 0;
 
         }
+       
 
 
 
@@ -77,6 +89,14 @@ public class GameManager : MonoBehaviour
 
     }
 
+    void SpawnBoss()
+    {
+        boss_info =  Instantiate(Bossobj, boss_spawn_pos.transform.position,
+                boss_spawn_pos.transform.rotation);
+        bosscs = boss_info.GetComponent<Boss>();
+        bosscs.obj_manager_in_bosscs = obj_manager_in_gm;
 
+        isBossSpawn = false;
+    }
 
 }

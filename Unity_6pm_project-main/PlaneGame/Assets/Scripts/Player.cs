@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     public Vector2 inputVec;
     
 
+
     public float my_speed = 10;
 
     float fire_delay= .2f;
@@ -23,6 +24,9 @@ public class Player : MonoBehaviour
     bool hit_bottombox = false;
 
     int hp=3;
+
+    float cur_timer;
+    float delay_timer = 0.5f;
 
     public ObjectManager obj_manager;
 
