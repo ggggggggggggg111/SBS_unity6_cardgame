@@ -1,29 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ObjectManager : MonoBehaviour
 {
-    public GameObject sparkle_expl;
+
     public GameObject enemy;
     public GameObject playerBullet;
-    public GameObject BossBullet;
+    public GameObject particleEffect;
+    public GameObject bossBullet;
 
     GameObject[] enemy_arr;
     GameObject[] playerBullet_arr;
-    GameObject[] sparkle_expl_arr;
-    GameObject[] bossbullet_arr;
+    GameObject[] particleEffect_arr;
+    GameObject[] bossBullet_arr;
 
     GameObject[] obj_arr;
 
-    
     void Start()
     {
 
         enemy_arr= new GameObject[30];
-        playerBullet_arr = new GameObject[50];
-        sparkle_expl_arr = new GameObject[30];
-        bossbullet_arr = new GameObject[150];
+        playerBullet_arr = new GameObject[32];
+        particleEffect_arr = new GameObject[32];
+        bossBullet_arr = new GameObject[100];
+
 
         InitObj();
 
@@ -31,27 +33,33 @@ public class ObjectManager : MonoBehaviour
 
     void InitObj()
     {
+
         for(int i =0; i<enemy_arr.Length; i++)
         {
             enemy_arr[i] = Instantiate(enemy);
             enemy_arr[i].SetActive(false);
 
         }
+
         for(int i=0; i<playerBullet_arr.Length; i++)
         {
             playerBullet_arr[i] = Instantiate(playerBullet);
             playerBullet_arr[i].SetActive(false);
 
         }
-        for (int i = 0; i < sparkle_expl_arr.Length; i++)
+
+        for(int i=0; i < particleEffect_arr.Length; i++)
         {
-            sparkle_expl_arr[i] = Instantiate(sparkle_expl);
-            sparkle_expl_arr[i].SetActive(false);
+            particleEffect_arr[i] = Instantiate(particleEffect);
+            particleEffect_arr[i].SetActive(false);
+
         }
-        for (int i = 0; i < bossbullet_arr.Length; i++)
+
+        for(int i =0; i<bossBullet_arr.Length; i++)
         {
-            bossbullet_arr[i] = Instantiate(BossBullet);
-            bossbullet_arr[i].SetActive(false);
+            bossBullet_arr[i]= Instantiate(bossBullet);
+            bossBullet_arr[i].SetActive(false);
+
         }
 
     }
@@ -69,13 +77,13 @@ public class ObjectManager : MonoBehaviour
                 obj_arr = playerBullet_arr;
                 break;
 
-            case "Sparkle_expl":
-                obj_arr = sparkle_expl_arr;
-                break;
-            case "BossBullet":
-                obj_arr = bossbullet_arr;
+            case "ParticleEffect":
+                obj_arr = particleEffect_arr;
                 break;
 
+            case "BossBullet":
+                obj_arr = bossBullet_arr;
+                break;
 
         }
 

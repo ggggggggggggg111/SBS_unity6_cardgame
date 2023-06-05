@@ -2,37 +2,42 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Rendering;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
+    
     public GameObject bullet;
     Rigidbody2D my_rigid;
 
     public Vector2 inputVec;
     
 
-
     public float my_speed = 10;
 
+    public float score = 0;
     float fire_delay= .2f;
     float cur_delay = 0;
     float bullet_speed = 6;
-
+    
     bool hit_leftbox =false;
     bool hit_rightbox = false;
     bool hit_topbox = false;
     bool hit_bottombox = false;
 
+    public float max_hp = 100;
+    public float cur_hp = 100;
+
+
+
+
     int hp=3;
 
-    float cur_timer;
-    float delay_timer = 0.5f;
-
     public ObjectManager obj_manager;
-
+    
     void Start()
     {
         my_rigid= GetComponent<Rigidbody2D>();
+        cur_hp = max_hp;
     }
 
     // Update is called once per frame
@@ -55,8 +60,10 @@ public class Player : MonoBehaviour
         }
 
         Fire();
-             
+        
     }
+
+     
 
     private void FixedUpdate()
     {
@@ -105,17 +112,20 @@ public class Player : MonoBehaviour
                 hit_bottombox = true;
             }
 
-
         }
-        /*else if(collision.transform.tag == "Enemy")
+
+
+        if (collision.gameObject.tag == "Enemy")
         {
-            
-            hp = hp - 1;
-
+            Hit(1);
             collision.gameObject.SetActive(false);
+        }
+        if (collision.gameObject.tag == "EnemyBullet")
+        {
+            Hit(1);
+            collision.gameObject.SetActive(false);
+        }
 
-
-        }*/
 
         //if (collision.transform.tag == "Boundary")
         //{
@@ -173,11 +183,13 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    void Hit(float dmg)
     {
-        if (collision.gameObject.tag == "Enemy")
+        cur_hp = cur_hp - dmg;
+        if(cur_hp <= 0)
         {
             gameObject.SetActive(false);
         }
     }
+
 }

@@ -7,10 +7,7 @@ public class PlayerBullet : MonoBehaviour
     Rigidbody2D my_rigid;
     public float bulletSpeed;
 
-   
-
-
-    float destroy_timer = 4;
+    float destroy_timer = 6;
     float cur_timer = 0;
 
 
