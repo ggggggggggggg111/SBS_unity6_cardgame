@@ -181,9 +181,11 @@ public class Boss : MonoBehaviour
         {
             cur_hp = cur_hp - 1;
 
+            GameObject Particle_info = obj_manger_in_bosscs.SelectObj("ParticleEffect");
+            Particle_info.transform.position = collision.transform.position;
             collision.gameObject.SetActive(false);
 
-            if (cur_hp < 0)
+            if (cur_hp <= 0)
             {
                 gameObject.SetActive(false);
             }

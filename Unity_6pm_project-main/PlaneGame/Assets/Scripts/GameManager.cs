@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public GameObject player_hpbar_obj;
 
     public GameObject game_over_obj;
+    public GameObject game_Win_obj;
 
     GameObject player_info;
     GameObject boss_info;
@@ -42,6 +43,7 @@ public class GameManager : MonoBehaviour
     
     public Text score_text;
     public Text game_over_text;
+    public Text game_win_text;
     public float score = 0;
     
 
@@ -72,19 +74,26 @@ public class GameManager : MonoBehaviour
         {
             boss_hp_slider.value = bosscs.cur_hp / bosscs.max_hp;
         }
+        if (bosscs.cur_hp <= 0)
+        {
+            game_Win_obj.SetActive(true);
+            game_win_text.text = "!!!!YOU WIN!!!!";
 
+            isBossAlive= false;
+            Invoke("StopTime", 1);
+        }
 
         player_hpdar.value = playercs_in_gm.cur_hp / playercs_in_gm.max_hp;
         if (playercs_in_gm.cur_hp <=0)
         {
             game_over_obj.SetActive(true);
-            game_over_text.text = "!!!!GmaeOver!!!!";
+            game_over_text.text = "!!!!GameOver!!!!";
         }
     }
     void Start()
     {
 
-        
+        Time.timeScale = 1.0f;
     }
     
     // Update is called once per frame
@@ -155,7 +164,18 @@ public class GameManager : MonoBehaviour
     }
     public void Restart()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("Stage1");
+        
     }
+    public void GoMenu()
+    {
+        SceneManager.LoadScene("Menu");
+    }
+     void StopTime()
+    {
+            Time.timeScale = 0;
+
+    }
+
 
 }
